@@ -11,7 +11,7 @@ import java.awt.event.WindowEvent;
 public class TankClient extends Frame {
     private int x = 50;
     private int y = 50;
-
+    private Image offScreenImage = null;
     public static void main(String[] args) {
         final TankClient client = new TankClient();
         client.launchFrame();
@@ -20,10 +20,23 @@ public class TankClient extends Frame {
     @Override
     public void paint(Graphics g) {
         final Color color = g.getColor();
-        g.setColor(Color.BLUE);
+        g.setColor(Color.YELLOW);
         g.fillOval(x, y, 30, 30);
         g.setColor(color);
         y++;
+    }
+
+    @Override
+    public void update(Graphics g) {
+        if (offScreenImage == null) {
+            offScreenImage = this.createImage(800, 600);
+        }
+        /* 图片上的画笔 */
+        final Graphics imageGraphics = offScreenImage.getGraphics();
+        paint(imageGraphics);
+
+        g.drawImage(offScreenImage, 0, 0, null);
+
     }
 
     private void launchFrame() {
@@ -35,6 +48,7 @@ public class TankClient extends Frame {
                 System.exit(0);
             }
         });
+        this.setBackground(Color.BLUE);
         this.setVisible(true);
         final Thread pt = new Thread(new PaintThread());
         pt.start();
