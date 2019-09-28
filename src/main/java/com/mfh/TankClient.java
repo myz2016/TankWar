@@ -11,6 +11,21 @@ import java.awt.event.WindowEvent;
 public class TankClient extends Frame {
     private int x = 50;
     private int y = 50;
+
+    public static void main(String[] args) {
+        final TankClient client = new TankClient();
+        client.launchFrame();
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        final Color color = g.getColor();
+        g.setColor(Color.BLUE);
+        g.fillOval(x, y, 30, 30);
+        g.setColor(color);
+        y++;
+    }
+
     private void launchFrame() {
         this.setLocation(200, 300);
         this.setSize(800, 600);
@@ -25,27 +40,13 @@ public class TankClient extends Frame {
         pt.start();
     }
 
-    @Override
-    public void paint(Graphics g) {
-        final Color color = g.getColor();
-        g.setColor(Color.BLUE);
-        g.fillOval(x, y, 30, 30);
-        g.setColor(color);
-        y++;
-    }
-
-    public static void main(String[] args) {
-        final TankClient client = new TankClient();
-        client.launchFrame();
-    }
-
     private class PaintThread implements Runnable {
         @Override
         public void run() {
             while (true) {
                 repaint();
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(20);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
