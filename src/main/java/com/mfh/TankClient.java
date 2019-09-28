@@ -33,6 +33,10 @@ public class TankClient extends Frame {
         }
         /* 图片上的画笔 */
         final Graphics imageGraphics = offScreenImage.getGraphics();
+        final Color color = imageGraphics.getColor();
+        imageGraphics.setColor(Color.BLUE);
+        imageGraphics.fillRect(0,0,800,600);
+        imageGraphics.setColor(color);
         paint(imageGraphics);
 
         g.drawImage(offScreenImage, 0, 0, null);
