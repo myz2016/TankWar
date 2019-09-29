@@ -45,19 +45,13 @@ public class TankClient extends Frame {
 
     @Override
     public void paint(Graphics g) {
-        final Color color = g.getColor();
-        g.setColor(Color.YELLOW);
-        g.fillOval(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
-        g.setColor(color);
+        tank.draw(g);
         paintEnemyTanks(g);
     }
 
     private void paintEnemyTanks(Graphics g) {
         for (Tank enemyTank : enemyTanks) {
-            final Color color = g.getColor();
-            g.setColor(Color.MAGENTA);
-            g.fillOval(enemyTank.getX(), enemyTank.getY(), Tank.WIDTH, Tank.HEIGHT);
-            g.setColor(color);
+            enemyTank.draw(g);
         }
     }
 

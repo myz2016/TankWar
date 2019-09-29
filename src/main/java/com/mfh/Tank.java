@@ -1,5 +1,7 @@
 package com.mfh;
 
+import java.awt.*;
+
 /**
  * @author mfh
  * @date 2019/9/29 20:02
@@ -30,5 +32,12 @@ public class Tank {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public void draw(Graphics g) {
+        final Color color = g.getColor();
+        g.setColor(Color.YELLOW);
+        g.fillOval(this.x, this.y, Tank.WIDTH, Tank.HEIGHT);
+        g.setColor(color);
     }
 }
