@@ -1,19 +1,30 @@
 package com.mfh;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author mfh
  * @date 2019/9/28 11:05
  */
 public class TankClient extends Frame {
-    private int tankX = 50;
-    private int tankY = 50;
+
+    private Tank tank = new Tank(50, 50);
+
+    /** 敌人坦克 */
+    private List<Tank> enemyTanks = new ArrayList<Tank>() {{
+        int x = 20;
+        int y = 500;
+        int max = 10;
+        for (int i = 0; i < max; i++) {
+            add(new Tank(x += Tank.WIDTH, y));
+        }
+    }};
     /**
      * 屏幕宽度
      */
@@ -24,14 +35,6 @@ public class TankClient extends Frame {
     private static final int SCREEN_HEIGHT = 600;
     private static final int SCREEN_X = 200;
     private static final int SCREEN_Y = 300;
-    /**
-     * 坦克宽度
-     */
-    private static final int TANK_WIDTH = 30;
-    /**
-     * 坦克高度
-     */
-    private static final int TANK_HEIGHT = 30;
 
     private Image offScreenImage = null;
 
@@ -44,9 +47,18 @@ public class TankClient extends Frame {
     public void paint(Graphics g) {
         final Color color = g.getColor();
         g.setColor(Color.YELLOW);
-        g.fillOval(tankX, tankY, TANK_WIDTH, TANK_HEIGHT);
+        g.fillOval(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
         g.setColor(color);
-//        tankY++;
+        paintEnemyTanks(g);
+    }
+
+    private void paintEnemyTanks(Graphics g) {
+        for (Tank enemyTank : enemyTanks) {
+            final Color color = g.getColor();
+            g.setColor(Color.MAGENTA);
+            g.fillOval(enemyTank.getX(), enemyTank.getY(), Tank.WIDTH, Tank.HEIGHT);
+            g.setColor(color);
+        }
     }
 
     @Override
@@ -81,16 +93,16 @@ public class TankClient extends Frame {
                 final int keyCode = e.getKeyCode();
                 switch (keyCode) {
                     case KeyEvent.VK_LEFT:
-                        tankX -= 5;
+                        tank.setX(tank.getX() - 5);
                         break;
                     case KeyEvent.VK_UP:
-                        tankY -= 5;
+                        tank.setY(tank.getY() - 5);
                         break;
                     case KeyEvent.VK_RIGHT:
-                        tankX += 5;
+                        tank.setX(tank.getX() + 5);
                         break;
                     case KeyEvent.VK_DOWN:
-                        tankY += 5;
+                        tank.setY(tank.getY() + 5);
                         break;
                     default:
                 }
@@ -115,5 +127,4 @@ public class TankClient extends Frame {
             }
         }
     }
-
 }
