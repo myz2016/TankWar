@@ -13,6 +13,12 @@ public class Tank {
     public static final int WIDTH = 30;
     public static final int HEIGHT = 30;
     boolean bL = false, bU = false, bR = false, bD = false;
+
+    /**
+     * 方向枚举
+     */
+    enum DirectionEnum {L,LU,U,RU,R,RD,D,LD,STOP}
+    private DirectionEnum dir;
     public Tank() {}
 
     public Tank(int x, int y) {
@@ -23,7 +29,6 @@ public class Tank {
     public int getX() {
         return x;
     }
-
     public void setX(int x) {
         this.x = x;
     }
