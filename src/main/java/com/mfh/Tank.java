@@ -1,6 +1,7 @@
 package com.mfh;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 /**
  * @author mfh
@@ -34,10 +35,29 @@ public class Tank {
         this.y = y;
     }
 
-    public void draw(Graphics g) {
+    void draw(Graphics g) {
         final Color color = g.getColor();
         g.setColor(Color.YELLOW);
         g.fillOval(this.x, this.y, Tank.WIDTH, Tank.HEIGHT);
         g.setColor(color);
+    }
+
+     void keyPressed(KeyEvent e) {
+        final int keyCode = e.getKeyCode();
+        switch (keyCode) {
+            case KeyEvent.VK_LEFT:
+                x -= 5;
+                break;
+            case KeyEvent.VK_UP:
+                y -= 5;
+                break;
+            case KeyEvent.VK_RIGHT:
+                x += 5;
+                break;
+            case KeyEvent.VK_DOWN:
+                y += 5;
+                break;
+            default:
+        }
     }
 }

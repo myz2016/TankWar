@@ -84,22 +84,7 @@ public class TankClient extends Frame {
         this.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                final int keyCode = e.getKeyCode();
-                switch (keyCode) {
-                    case KeyEvent.VK_LEFT:
-                        tank.setX(tank.getX() - 5);
-                        break;
-                    case KeyEvent.VK_UP:
-                        tank.setY(tank.getY() - 5);
-                        break;
-                    case KeyEvent.VK_RIGHT:
-                        tank.setX(tank.getX() + 5);
-                        break;
-                    case KeyEvent.VK_DOWN:
-                        tank.setY(tank.getY() + 5);
-                        break;
-                    default:
-                }
+                tank.keyPressed(e);
             }
         });
         this.setBackground(Color.BLUE);
