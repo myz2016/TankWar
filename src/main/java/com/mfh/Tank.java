@@ -12,6 +12,7 @@ public class Tank {
     private int y;
     public static final int WIDTH = 30;
     public static final int HEIGHT = 30;
+    boolean bL = false, bU = false, bR = false, bD = false;
     public Tank() {}
 
     public Tank(int x, int y) {
