@@ -68,6 +68,9 @@ public class Tank {
         }
     }
 
+    /**
+     * 定位方向
+     */
     private void locateDirection() {
         if (bL && !bU && !bR && !bD) { dir = DirectionEnum.L; }
         if (bL && bU && !bR && !bD) { dir = DirectionEnum.LU; }
@@ -84,6 +87,7 @@ public class Tank {
         g.setColor(Color.YELLOW);
         g.fillOval(this.x, this.y, Tank.WIDTH, Tank.HEIGHT);
         g.setColor(color);
+        move();
     }
 
     void keyPressed(KeyEvent e) {
@@ -104,7 +108,6 @@ public class Tank {
             default:
         }
         locateDirection();
-        move();
     }
 
     public int getX() {
