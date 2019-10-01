@@ -64,21 +64,11 @@ public class Tank {
                 x -= X_SPEED;
                 break;
             case STOP:
-                this.resetDirectionFlag();
                 break;
             default:
         }
     }
 
-    /**
-     * 重置方向标记
-     */
-    private void resetDirectionFlag() {
-        this.bL = false;
-        this.bD = false;
-        this.bR = false;
-        this.bU = false;
-    }
     /**
      * 定位方向
      */
@@ -91,6 +81,7 @@ public class Tank {
         if (!bL && !bU && bR && bD) { dir = DirectionEnum.RD; }
         if (!bL && !bU && !bR && bD) { dir = DirectionEnum.D; }
         if (bL && !bU && !bR && bD) { dir = DirectionEnum.LD; }
+        if (!bL && !bU && !bR && !bD) { dir = DirectionEnum.STOP; }
     }
 
     void draw(Graphics g) {
@@ -102,8 +93,23 @@ public class Tank {
     }
 
     void keyReleased(KeyEvent e) {
-        dir = DirectionEnum.STOP;
-        move();
+        final int keyCode = e.getKeyCode();
+        switch (keyCode) {
+            case KeyEvent.VK_LEFT:
+                bL = false;
+                break;
+            case KeyEvent.VK_UP:
+                bU = false;
+                break;
+            case KeyEvent.VK_RIGHT:
+                bR = false;
+                break;
+            case KeyEvent.VK_DOWN:
+                bD = false;
+                break;
+            default:
+        }
+        locateDirection();
     }
 
     void keyPressed(KeyEvent e) {
