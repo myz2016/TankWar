@@ -17,17 +17,18 @@ public class Tank {
 
     boolean bL = false, bU = false, bR = false, bD = false;
 
+
+
     /**
      * 方向枚举
      */
-    enum DirectionEnum {L, LU, U, RU, R, RD, D, LD, STOP}
-
+    enum DirectionEnum {L, LU, U, RU, R, RD, D, LD, STOP,;}
     private DirectionEnum dir = DirectionEnum.STOP;
 
     public Tank() {
     }
 
-    public Tank(int x, int y) {
+    Tank(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -63,11 +64,21 @@ public class Tank {
                 x -= X_SPEED;
                 break;
             case STOP:
+                this.resetDirectionFlag();
                 break;
             default:
         }
     }
 
+    /**
+     * 重置方向标记
+     */
+    private void resetDirectionFlag() {
+        this.bL = false;
+        this.bD = false;
+        this.bR = false;
+        this.bU = false;
+    }
     /**
      * 定位方向
      */
@@ -87,6 +98,11 @@ public class Tank {
         g.setColor(Color.YELLOW);
         g.fillOval(this.x, this.y, Tank.WIDTH, Tank.HEIGHT);
         g.setColor(color);
+        move();
+    }
+
+    void keyReleased(KeyEvent e) {
+        dir = DirectionEnum.STOP;
         move();
     }
 

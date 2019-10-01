@@ -86,6 +86,11 @@ public class TankClient extends Frame {
             public void keyPressed(KeyEvent e) {
                 tank.keyPressed(e);
             }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                tank.keyReleased(e);
+            }
         });
         this.setBackground(Color.BLUE);
         this.setVisible(true);
