@@ -14,9 +14,9 @@ import java.util.List;
  */
 public class TankClient extends Frame {
 
-    private Tank tank = new Tank(50, 50);
+    private Tank tank = new Tank(50, 50, this);
 
-    private Missile missile = new Missile(50 + Tank.WIDTH/2, 50 + Tank.HEIGHT/2, Tank.DirectionEnum.D);
+    private Missile missile = null;
     /** 敌人坦克 */
     private List<Tank> enemyTanks = new ArrayList<Tank>() {{
         int x = 20;
@@ -46,7 +46,9 @@ public class TankClient extends Frame {
 
     @Override
     public void paint(Graphics g) {
-        missile.draw(g);
+        if (missile != null) {
+            missile.draw(g);
+        }
         tank.draw(g);
         paintEnemyTanks(g);
     }
@@ -112,5 +114,13 @@ public class TankClient extends Frame {
                 }
             }
         }
+    }
+
+    public Missile getMissile() {
+        return missile;
+    }
+
+    public void setMissile(Missile missile) {
+        this.missile = missile;
     }
 }

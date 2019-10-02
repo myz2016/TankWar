@@ -17,6 +17,7 @@ public class Tank {
 
     boolean bL = false, bU = false, bR = false, bD = false;
 
+    private TankClient client;
 
 
     /**
@@ -31,6 +32,12 @@ public class Tank {
     Tank(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    public Tank(int x, int y, TankClient client) {
+        this.x = x;
+        this.y = y;
+        this.client = client;
     }
 
     private void move() {
@@ -115,6 +122,10 @@ public class Tank {
     void keyPressed(KeyEvent e) {
         final int keyCode = e.getKeyCode();
         switch (keyCode) {
+            case KeyEvent.VK_CONTROL:
+                final Missile missile = this.fire();
+                this.client.setMissile(missile);
+                break;
             case KeyEvent.VK_LEFT:
                 bL = true;
                 break;
@@ -130,6 +141,10 @@ public class Tank {
             default:
         }
         locateDirection();
+    }
+
+    private Missile fire() {
+        return new Missile(this.x + Tank.WIDTH/2, this.y + Tank.HEIGHT/2, dir);
     }
 
     public int getX() {
