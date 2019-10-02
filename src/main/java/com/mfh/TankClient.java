@@ -16,6 +16,7 @@ public class TankClient extends Frame {
 
     private Tank tank = new Tank(50, 50);
 
+    private Missile missile = new Missile(50 + Tank.WIDTH/2, 50 + Tank.HEIGHT/2, Tank.DirectionEnum.D);
     /** 敌人坦克 */
     private List<Tank> enemyTanks = new ArrayList<Tank>() {{
         int x = 20;
@@ -45,6 +46,7 @@ public class TankClient extends Frame {
 
     @Override
     public void paint(Graphics g) {
+        missile.draw(g);
         tank.draw(g);
         paintEnemyTanks(g);
     }
